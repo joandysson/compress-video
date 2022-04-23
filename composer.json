@@ -3,7 +3,8 @@
     "description": "compress file",
     "autoload": {
         "psr-4": {
-            "Compress\\": "src/"
+            "Compress\\": "src/",
+            "Test\\": "test/"
         }
     },
     "authors": [
@@ -11,6 +12,7 @@
             "name": "joandysson gama"
         }
     ],
-    "require": {
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
     }
 }
