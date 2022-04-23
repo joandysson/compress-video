@@ -1,0 +1,16 @@
+{
+    "name": "gama/compress",
+    "description": "compress file",
+    "autoload": {
+        "psr-4": {
+            "Compress\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "joandysson gama"
+        }
+    ],
+    "require": {
+    }
+}
