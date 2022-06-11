@@ -23,7 +23,7 @@ class Compress {
                 $outputFile = sprintf('%s%s/%s',pathinfo($file)['dirname'],self::COMPRESSED, pathinfo($file)['basename']);
                 $command = sprintf('/usr/bin/ffmpeg -i %s -b:v %s -bufsize %s %s 2>&1', $file, getenv('BITRATE'), getenv('BITRATE'), $outputFile);
 
-                shell_exec($command);
+                static::compress($command);
             }catch(\Throwable $t){
                 return $t->getMessage();
             }
@@ -32,4 +32,16 @@ class Compress {
         return 'ok';
     }
 
+    private static function compress($command)
+    {
+        while (ob_end_flush());
+        $proc = popen($command, 'r');
+        echo '<pre>';
+        while (!feof($proc))
+        {
+            echo fread($proc, 4096);
+            flush();
+        }
+        pclose($proc);
+    }
 }
