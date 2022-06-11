@@ -20,15 +20,16 @@ class Compress {
     {
         foreach($this->getAllFiles() as $file) {
             try{
-                $output = sprintf('%s%s%s/%s',__DIR__, $this->path, self::COMPRESSED, pathinfo($file)['basename']);
+                $outputFile = sprintf('%s%s/%s',pathinfo($file)['dirname'],self::COMPRESSED, pathinfo($file)['basename']);
+                $command = sprintf('/usr/bin/ffmpeg -i %s -b:v %s -bufsize %s %s 2>&1', $file, getenv('BITRATE'), getenv('BITRATE'), $outputFile);
 
-                exit($output);
-                $command = sprintf('ffmpeg -i %s -b:v %s -bufsize %s %s', $file, getenv('BITRATE'), getenv('BITRATE'), $output);
-                exec($command);
+                shell_exec($command);
             }catch(\Throwable $t){
-                echo $t->getMessage();
+                return $t->getMessage();
             }
         }
+
+        return 'ok';
     }
 
 }
