@@ -11,7 +11,3 @@ COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 RUN chown -R www-data:www-data /var/www/html/
 RUN chmod -R 777 /var/www/html/
-
-# sudo chmod -R a+rwx,o-wrx .
-
-RUN a2enmod rewrite
